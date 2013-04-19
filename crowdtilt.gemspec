@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
  
   s.add_runtime_dependency 'faraday', ['~> 0.8', '< 0.10']
   s.add_runtime_dependency 'faraday_middleware', '~> 0.9.0'
-  s.add_runtime_dependency 'activesupport', '~> 3.2.13'
+  s.add_runtime_dependency 'activesupport'
   s.add_runtime_dependency 'json'
   
 end
