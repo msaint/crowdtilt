@@ -11,7 +11,7 @@ For the latest information on this project, take a look at:
 
 ###Including the gem in your Gemfile###
 
-    gem 'crowdtilt', github: 'msaint/crowdtilt'
+    gem 'crowdtilt', :github => 'msaint/crowdtilt'
 
 
 ###Initializing the client###
