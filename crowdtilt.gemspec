@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://www.crowdtilt.com/learn/developers'
   
   s.add_development_dependency 'bundler', '~> 1.0'
-  s.add_development_dependency 'rake'
-  s.add_development_dependency 'rspec', '~> 1.3.0'
-
-  
-  s.add_dependency 'faraday', ['~> 0.8', '< 0.10']
+ 
+  s.add_runtime_dependency 'faraday', ['~> 0.8', '< 0.10']
+  s.add_runtime_dependency 'faraday_middleware', '~> 0.9.0'
+  s.add_runtime_dependency 'activesupport', '~> 3.2.13'
+  s.add_runtime_dependency 'json'
   
 end
