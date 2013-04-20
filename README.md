@@ -19,12 +19,9 @@ Your api_key / api_secret is required to initialize the client.  Please email [s
 
 You should specify with the `mode` parameter whether you are attempting to access the `sandbox` API or the `production` API.
 
-    crowdtilt = Crowdtilt.new(
-                     :api_key => YOUR_API_KEY, 
-                     :api_secret => YOUR_API_SECRET, 
-                     :mode => API_MODE   # 'sandbox' or 'production'
-                )
-
+    Crowdtilt.configure :api_key => YOUR_API_KEY, 
+                        :api_secret => YOUR_API_SECRET, 
+                        :mode => API_MODE   # 'sandbox' or 'production'
 
 ###Calling API methods###
 See [Crowdtilt's API documentation](https://github.com/Crowdtilt/crowdtilt-api-spec) for more information about the list of available client methods.  Methods are called by simply passing in the URI of the resource you are accessing, along with any needed parameters as a hash object.
@@ -43,14 +40,14 @@ Create a user:
       :email => 'js@example.com'
     }
         
-    response = crowdtilt.post('/v1/users', { :user => user })
+    response = Crowdtilt.post('/v1/users', { :user => user })
 
 Get a list of users:
 
-    response = crowdtilt.get('/v1/users')
+    response = Crowdtilt.get('/v1/users')
     
 Update a user:
 
     user_update = { :email => 'newemail@example.com' }
 
-    response = crowdtilt.put('/v1/users/USR123', { :user => user_update })
+    response = Crowdtilt.put('/v1/users/USR123', { :user => user_update })
