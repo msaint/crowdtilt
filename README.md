@@ -4,7 +4,7 @@ An extremely light-weight ruby-based http client for the Crowdtilt API
 
 For the latest information on this project, take a look at:
 
-* [This project's source code repo](http://github.com/crowdtilt/crowdtilt.rb/)
+* [This project's source code repo](https://github.com/msaint/crowdtilt)
 * [The Crowdtilt API documentation](https://github.com/Crowdtilt/crowdtilt-api-spec)
 
 ##Usage Examples##
