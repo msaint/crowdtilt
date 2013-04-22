@@ -7,22 +7,21 @@ module Crowdtilt
   
   class << self
     
-    attr_accessor :api_key, :api_secret, :mode, :url
+    attr_accessor :api_key, :api_secret, :mode, :base_url
     
     def configure(params)
-      raise ArgumentError, "You must include both the api_key and api_secret"
-        unless (params.include?(:api_key) && params.include?(:api_secret))
+      raise ArgumentError, "You must include both the api_key and api_secret" unless (params.include?(:api_key) && params.include?(:api_secret))
       @api_key = params[:api_key]
       @api_secret = params[:api_secret]
       
       if params[:mode] == 'production'
         @mode = 'production'
-        @url = 'https://api.crowdtilt.com'
+        @base_url = 'https://api.crowdtilt.com/v1'
       else
         @mode = 'sandbox'
-        @url = 'https://api-sandbox.crowdtilt.com'
+        @base_url = 'https://api-sandbox.crowdtilt.com/v1'
       end
-      @url = params[:base_url] if params[:base_url]
+      @base_url = params[:base_url] if params[:base_url]
       true      
     end 
   
@@ -43,29 +42,25 @@ module Crowdtilt
     end
   
     def get_users()
-      res = get('/v1/users')
-      return res['users']
+      get('/users')['users']
     end
 
     def get_user(id)
-      res = get("/v1/users/#{id}")
-      return res['user']
+      get("/users/#{id}")['user']
     end
 
     def create_user(user)
-      res = post('/v1/users', { :user => user })
-      return res['user']
+      post('/users', { :user => user })['user']
     end
 
     def update_user(id, user)
-      res = put("/v1/users/#{id}", { :user => user });
-      return res['user']
+      put("/users/#{id}", { :user => user })['user']
     end
 
     private
   
     def request(method,*args)
-      conn = Faraday.new(:url => @url) do |faraday|
+      conn = Faraday.new(:url => @base_url) do |faraday|
         # faraday.response :logger
         faraday.request :json
         faraday.response :json, :content_type => /\bjson$/
