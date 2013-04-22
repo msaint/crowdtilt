@@ -10,7 +10,8 @@ module Crowdtilt
     attr_accessor :api_key, :api_secret, :mode, :url
     
     def configure(params)
-      raise ArgumentError, "You must include both the api_key and api_secret" unless (params.include?(:api_key) && params.include?(:api_secret))
+      raise ArgumentError, "You must include both the api_key and api_secret"
+        unless (params.include?(:api_key) && params.include?(:api_secret))
       @api_key = params[:api_key]
       @api_secret = params[:api_secret]
       
@@ -21,6 +22,7 @@ module Crowdtilt
         @mode = 'sandbox'
         @url = 'https://api-sandbox.crowdtilt.com'
       end
+      @url = params[:base_url] if params[:base_url]
       true      
     end 
   
@@ -40,6 +42,26 @@ module Crowdtilt
       request :delete, uri(string)
     end
   
+    def get_users()
+      res = get('/v1/users')
+      return res['users']
+    end
+
+    def get_user(id)
+      res = get("/v1/users/#{id}")
+      return res['user']
+    end
+
+    def create_user(user)
+      res = post('/v1/users', { :user => user })
+      return res['user']
+    end
+
+    def update_user(id, user)
+      res = put("/v1/users/#{id}", { :user => user });
+      return res['user']
+    end
+
     private
   
     def request(method,*args)

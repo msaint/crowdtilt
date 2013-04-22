@@ -40,14 +40,16 @@ Create a user:
       :email => 'js@example.com'
     }
         
-    response = Crowdtilt.post('/v1/users', { :user => user })
+    response = Crowdtilt.create_user(user)
 
 Get a list of users:
 
-    response = Crowdtilt.get('/v1/users')
+    response = Crowdtilt.get_users
+    
+Get a specific of user:
+
+    response = Crowdtilt.get_user('USR123')
     
 Update a user:
 
-    user_update = { :email => 'newemail@example.com' }
-
-    response = Crowdtilt.put('/v1/users/USR123', { :user => user_update })
+    response = Crowdtilt.update_user('USR123', { :email => 'newemail@foo.com' })
