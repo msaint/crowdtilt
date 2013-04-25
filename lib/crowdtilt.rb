@@ -7,7 +7,7 @@ module Crowdtilt
   
   class << self
     
-    attr_accessor :api_key, :api_secret, :mode, :url
+    attr_accessor :api_key, :api_secret, :mode, :base_url
     
     def configure(params)
       raise ArgumentError, "You must include both the api_key and api_secret" unless (params.include?(:api_key) && params.include?(:api_secret))
@@ -16,11 +16,12 @@ module Crowdtilt
       
       if params[:mode] == 'production'
         @mode = 'production'
-        @url = 'https://api.crowdtilt.com'
+        @base_url = 'https://api.crowdtilt.com/v1'
       else
         @mode = 'sandbox'
-        @url = 'https://api-sandbox.crowdtilt.com'
+        @base_url = 'https://api-sandbox.crowdtilt.com/v1'
       end
+      @base_url = params[:base_url] if params[:base_url]
       true      
     end 
   
@@ -40,10 +41,26 @@ module Crowdtilt
       request :delete, uri(string)
     end
   
+    def get_users()
+      get('/users')['users']
+    end
+
+    def get_user(id)
+      get("/users/#{id}")['user']
+    end
+
+    def create_user(user)
+      post('/users', { :user => user })['user']
+    end
+
+    def update_user(id, user)
+      put("/users/#{id}", { :user => user })['user']
+    end
+
     private
   
     def request(method,*args)
-      conn = Faraday.new(:url => @url) do |faraday|
+      conn = Faraday.new(:url => @base_url) do |faraday|
         # faraday.response :logger
         faraday.request :json
         faraday.response :json, :content_type => /\bjson$/

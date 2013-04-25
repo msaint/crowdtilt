@@ -23,10 +23,9 @@ You should specify with the `mode` parameter whether you are attempting to acces
                         :api_secret => YOUR_API_SECRET, 
                         :mode => API_MODE   # 'sandbox' or 'production'
 
-###Calling API methods###
-See [Crowdtilt's API documentation](https://github.com/Crowdtilt/crowdtilt-api-spec) for more information about the list of available client methods.  Methods are called by simply passing in the URI of the resource you are accessing, along with any needed parameters as a hash object.
+###API methods###
 
-The response is returned as a hash.
+Responses are returned as hashes.
 
 Errors returned by the API will be raised as exceptions.
 
@@ -34,20 +33,38 @@ Errors returned by the API will be raised as exceptions.
 
 Create a user:
     
+    user = Crowdtilt.create_user({
+      :firstname => 'John',
+      :lastname => 'Smith',
+      :email => 'js@example.com'
+    })
+
+Get a list of users:
+
+    users = Crowdtilt.get_users
+    
+Get a specific of user:
+
+    user = Crowdtilt.get_user('USR123')
+    
+Update a user:
+
+    user = Crowdtilt.update_user('USR123', { :email => 'newemail@foo.com' })
+
+**Raw requests:**
+
+You can make raw requests by invoking the lower level api methods `get`, `post`, and `put`.  See [Crowdtilt's API documentation](https://github.com/Crowdtilt/crowdtilt-api-spec) for more information about the list of available resources.  Methods are called by simply passing in the URI of the resource you are accessing, along with any needed data as a hash object.
+
+Create a user:
+
     user = {
       :firstname => 'John',
       :lastname => 'Smith',
       :email => 'js@example.com'
     }
-        
+
     response = Crowdtilt.post('/v1/users', { :user => user })
 
 Get a list of users:
 
     response = Crowdtilt.get('/v1/users')
-    
-Update a user:
-
-    user_update = { :email => 'newemail@example.com' }
-
-    response = Crowdtilt.put('/v1/users/USR123', { :user => user_update })
