@@ -7,21 +7,26 @@ module Crowdtilt
   
   class << self
     
-    attr_accessor :api_key, :api_secret, :mode, :base_url
+    attr_accessor :api_key, :api_secret, :mode, :base_url, :version
     
     def configure(params)
       raise ArgumentError, "You must include both the api_key and api_secret" unless (params.include?(:api_key) && params.include?(:api_secret))
       @api_key = params[:api_key]
       @api_secret = params[:api_secret]
       
+      @version = 'v1'
+      
       if params[:mode] == 'production'
         @mode = 'production'
-        @base_url = 'https://api.crowdtilt.com/v1'
+        @base_url = 'https://api.crowdtilt.com'
       else
         @mode = 'sandbox'
-        @base_url = 'https://api-sandbox.crowdtilt.com/v1'
+        @base_url = 'https://api-sandbox.crowdtilt.com'
       end
+      
       @base_url = params[:base_url] if params[:base_url]
+      @version = params[:version] if params[:version]
+      
       true      
     end 
   
@@ -42,19 +47,19 @@ module Crowdtilt
     end
   
     def get_users()
-      get('/users')['users']
+      get("/#{@version}/users")['users']
     end
 
     def get_user(id)
-      get("/users/#{id}")['user']
+      get("/#{@version}/users/#{id}")['user']
     end
 
     def create_user(user)
-      post('/users', { :user => user })['user']
+      post("/#{@version}/users", { :user => user })['user']
     end
 
     def update_user(id, user)
-      put("/users/#{id}", { :user => user })['user']
+      put("/#{@version}/users/#{id}", { :user => user })['user']
     end
 
     private
@@ -65,7 +70,6 @@ module Crowdtilt
         faraday.request :json
         faraday.response :json, :content_type => /\bjson$/
         faraday.use :instrumentation
-  
         faraday.adapter Faraday.default_adapter
       end
       conn.basic_auth(@api_key, @api_secret)
@@ -88,14 +92,14 @@ module Crowdtilt
     end
     
     def uri(string)   
-      if string =~ /^\/v1/
+      if string =~ /^\/v/
         string
-      elsif string =~ /^v1/
+      elsif string =~ /^v/
         '/' + string
       elsif string =~ /^\//
-        '/v1' + string
+        "/#{@version}" + string
       else
-        '/v1/' + string
+        "/#{@version}/" + string
       end
     end
   
