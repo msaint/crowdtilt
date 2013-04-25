@@ -47,19 +47,19 @@ module Crowdtilt
     end
   
     def get_users()
-      get("/#{@version}/users")['users']
+      get("/users")['users']
     end
 
     def get_user(id)
-      get("/#{@version}/users/#{id}")['user']
+      get("/users/#{id}")['user']
     end
 
     def create_user(user)
-      post("/#{@version}/users", { :user => user })['user']
+      post("/users", { :user => user })['user']
     end
 
     def update_user(id, user)
-      put("/#{@version}/users/#{id}", { :user => user })['user']
+      put("/users/#{id}", { :user => user })['user']
     end
 
     private
