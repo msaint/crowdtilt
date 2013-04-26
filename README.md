@@ -63,8 +63,8 @@ Create a user:
       :email => 'js@example.com'
     }
 
-    response = Crowdtilt.post('/v1/users', { :user => user })
+    response = Crowdtilt.post('/users', { :user => user })
 
 Get a list of users:
 
-    response = Crowdtilt.get('/v1/users')
+    response = Crowdtilt.get('/users')
