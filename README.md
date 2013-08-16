@@ -11,7 +11,7 @@ For the latest information on this project, take a look at:
 
 ###Including the gem in your Gemfile###
 
-    gem 'crowdtilt', :github => 'msaint/crowdtilt'
+    gem 'crowdtilt'
 
 
 ###Initializing the client###
@@ -19,8 +19,8 @@ Your api_key / api_secret is required to initialize the client.  Please email [s
 
 You should specify with the `mode` parameter whether you are attempting to access the `sandbox` API or the `production` API.
 
-    Crowdtilt.configure :api_key => YOUR_API_KEY, 
-                        :api_secret => YOUR_API_SECRET, 
+    Crowdtilt.configure :api_key => YOUR_API_KEY,
+                        :api_secret => YOUR_API_SECRET,
                         :mode => API_MODE   # 'sandbox' or 'production'
 
 ###API methods###
@@ -32,7 +32,7 @@ Errors returned by the API will be raised as exceptions.
 **Examples:**
 
 Create a user:
-    
+
     user = Crowdtilt.create_user({
       :firstname => 'John',
       :lastname => 'Smith',
@@ -42,11 +42,11 @@ Create a user:
 Get a list of users:
 
     users = Crowdtilt.get_users
-    
+
 Get a specific of user:
 
     user = Crowdtilt.get_user('USR123')
-    
+
 Update a user:
 
     user = Crowdtilt.update_user('USR123', { :email => 'newemail@foo.com' })
