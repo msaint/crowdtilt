@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
   s.name        = 'crowdtilt'
-  s.version     = '0.0.1'
-  s.date        = '2013-04-17'
+  s.version     = '1.0.0'
+  s.date        = '2013-08-16'
   s.summary     = "Crowdtilt Ruby Client"
   s.description = "A lightweight ruby wrapper for the Crowdtilt API"
   s.authors     = ["Marc St Raymond"]
   s.email       = 'marc@crowditlt.com'
   s.files       = ["lib/crowdtilt.rb"]
   s.homepage    = 'https://www.crowdtilt.com/learn/developers'
-  spec.license = 'MIT'
+  s.license = 'MIT'
 
   s.add_development_dependency 'bundler', '~> 1.0'
 
