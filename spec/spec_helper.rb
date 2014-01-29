@@ -1,1 +1,1 @@
-require_relative '../lib/crowdtilt'
+require 'crowdtilt'

@@ -10,3 +10,14 @@ doc/*
 Gemfile.lock
 log/*
 pkg/*
+
+# Editor Files
+*.sublime-workspace
+.*.sw?
+.idea/*
+
+# yes, we use macs
+.DS_Store
+
+.ruby-gemset
+.ruby-version
