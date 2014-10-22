@@ -19,7 +19,7 @@ describe "Configuring" do
     Crowdtilt.api_key.should == "key"
     Crowdtilt.api_secret.should == "secret"
     Crowdtilt.mode.should == "sandbox"
-    Crowdtilt.base_url.should == "https://api-sandbox.crowdtilt.com"
+    Crowdtilt.base_url.should == "https://api-sandbox.tilt.com"
   end
 
   it "should hit production if mode is set to production" do
@@ -27,7 +27,7 @@ describe "Configuring" do
     Crowdtilt.api_key.should == "key"
     Crowdtilt.api_secret.should == "secret"
     Crowdtilt.mode.should == "production"
-    Crowdtilt.base_url.should == "https://api.crowdtilt.com"
+    Crowdtilt.base_url.should == "https://api.tilt.com"
   end
 
   it 'should return body for 200 status code' do

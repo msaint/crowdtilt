@@ -18,10 +18,10 @@ module Crowdtilt
 
       if params[:mode] == 'production'
         @mode = 'production'
-        @base_url = 'https://api.crowdtilt.com'
+        @base_url = 'https://api.tilt.com'
       else
         @mode = 'sandbox'
-        @base_url = 'https://api-sandbox.crowdtilt.com'
+        @base_url = 'https://api-sandbox.tilt.com'
       end
 
       @base_url = params[:base_url] if params[:base_url]
