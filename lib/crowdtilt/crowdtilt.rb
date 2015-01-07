@@ -31,19 +31,35 @@ module Crowdtilt
     end
 
     def get(string)
-      request :get, uri(string)
+      if block_given?
+        request :get, uri(string), &Proc.new
+      else
+        request :get, uri(string)
+      end
     end
 
     def post(string, params={})
-      request :post, uri(string), params
+      if block_given?
+        request :post, uri(string), params, &Proc.new
+      else
+        request :post, uri(string), params
+      end
     end
 
     def put(string, params={})
-      request :put, uri(string), params
+      if block_given?
+        request :put, uri(string), params, &Proc.new
+      else
+        request :put, uri(string), params
+      end
     end
 
     def delete(string)
-      request :delete, uri(string)
+      if block_given?
+        request :delete, uri(string), &Proc.new
+      else
+        request :delete, uri(string)
+      end
     end
 
     def get_users()
@@ -64,7 +80,7 @@ module Crowdtilt
 
     private
 
-    def request(method,*args)
+    def request(method, *args)
       conn = Faraday.new(:url => @base_url) do |faraday|
         # faraday.response :logger
         faraday.request :json
@@ -74,6 +90,8 @@ module Crowdtilt
       end
       conn.basic_auth(@api_key, @api_secret)
       conn.headers.update({'Content-Type' => 'application/json'})
+
+      yield conn if block_given?
 
       res = conn.send method.to_sym, *args
       handle_response(res)

@@ -96,4 +96,10 @@ describe "Configuring" do
     end
   end
 
+  it "yields the connection" do
+    Faraday::Connection.any_instance.stub(:get).and_return({})
+
+    expect {|b| Crowdtilt.get('foo', &b) }.to yield_with_args(Faraday::Connection)
+  end
+
 end
