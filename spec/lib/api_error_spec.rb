@@ -20,4 +20,9 @@ describe "ApiError" do
       e.backtrace.should be_an Array
     end
   end
+
+  it 'loads error_id' do
+    e = Crowdtilt::ApiError.new('message', { :body => { 'error_id' => 'ERR_ID_TEST_WORKED' }} )
+    expect(e.error_id).to eq('ERR_ID_TEST_WORKED')
+  end
 end

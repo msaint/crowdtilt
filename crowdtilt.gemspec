@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'crowdtilt'
-  s.version     = '1.0.3'
+  s.version     = '1.0.4'
   s.date        = '2013-08-16'
   s.summary     = "Crowdtilt Ruby Client"
   s.description = "A lightweight ruby wrapper for the Crowdtilt API"
